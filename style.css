@@ -330,7 +330,7 @@ body{
 .slide_button_3:hover,
 .slide_button_4:hover{
     background-color:var(--color-five);
-    color:var(--color-four);
+    color:var(--color-three);
     transform:scale(1.05);
     transition:all 0.2s ease;
 }

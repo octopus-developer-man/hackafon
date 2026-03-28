@@ -96,6 +96,12 @@ function trackAnswer(question, userAnswer, correctAnswer, isCorrect) {
         isCorrect: isCorrect,
         slideIndex: current_slide_index
     });
+    
+    // Hide hint button after answering
+    const hint_button = document.getElementById('ai_hint_button');
+    if (hint_button) {
+        hint_button.style.display = 'none';
+    }
 }
 
 // Show explanation modal for wrong answers
