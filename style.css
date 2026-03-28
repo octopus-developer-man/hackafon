@@ -1,20 +1,63 @@
 :root{
-    --color-one: #ff0000;
-    --color-two: #00ff00;
-    --color-three: #0000ff;
-    --color-four:#ffff00;
-    --color-five:#ff00ff;
-    --color-six:#00ffff;
-    --color-seven:#aaaaaa;
+    --color-one: #5ADED4;
+    --color-two: #4DAAAB;
+    --color-three: #26596A;
+    --color-four:#163342;
+    --color-five:#6C98A1;
+    --color-six:#C4D7ED;
+    --color-seven:#E1E6FA;
 }
 body{
     background-color:var(--color-one);
     height:100vh;
     width:100vw;
     overflow:hidden;
+    font-family:"Fira Sans", sans-serif;
 }
 h1{
     text-align:center;
-    color:black;
+    color:var(--color-four);
     margin-top:20px;
+}
+.home > button{
+    display:block;
+    margin:20px auto;
+    padding:10px 20px;
+    background-color:var(--color-two);
+    color:var(--color-seven);
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+    text-align:center;
+}
+.home > button:hover{
+    background-color:var(--color-five);
+}
+.sgi_close_button,
+.sgc_close_button{
+    display:block;
+    margin:20px auto;
+    padding:10px 20px;
+    background-color:var(--color-two);
+    color:var(--color-seven);
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+    text-align:center;
+}
+.sgi_close_button:hover,
+.sgc_close_button:hover{
+    background-color:var(--color-five);
+}
+.study_guide_interface, .study_guide_creator{
+    display:none;
+    background-color:var(--color-one);
+    height:100vh;
+    width:100vw;
+    overflow:auto;
+    position:absolute;
+    top:0px;
+    left:0px;
 }
