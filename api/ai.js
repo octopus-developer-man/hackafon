@@ -25,10 +25,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Invalid mode or missing parameters" });
     }
 
-    // Use OpenAI API with timeout
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
-
+    // Use OpenAI API
     const openaiResponse = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -41,10 +38,7 @@ export default async function handler(req, res) {
         temperature: 0.7,
         max_tokens: 500,
       }),
-      signal: controller.signal,
     });
-
-    clearTimeout(timeoutId);
 
     if (!openaiResponse.ok) {
       const error = await openaiResponse.json();
@@ -67,12 +61,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ reply });
   } catch (error) {
     console.error("Server error:", error.message);
-    
-    // Handle timeout errors
-    if (error.name === 'AbortError') {
-      return res.status(504).json({ error: "Request timeout - AI service took too long" });
-    }
-
     return res.status(500).json({ error: "Internal server error", details: error.message });
   }
 }
