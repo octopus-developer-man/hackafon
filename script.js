@@ -5,6 +5,7 @@ const study_guide_interface = document.querySelector('.study_guide_interface');
 const study_guide_creator = document.querySelector('.study_guide_creator');
 const sgi_close_button = document.querySelector('.sgi_close_button');
 const sgc_close_button = document.querySelector('.sgc_close_button');
+const sgi_next_button = document.querySelector('.sgi_next_button');
 
 sgi_open_button.onclick = () => {
     home_div.style.display = 'none';
