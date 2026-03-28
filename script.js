@@ -447,13 +447,13 @@ sgi_open_button.onclick = () => {
 };
 
 sgi_close_button.onclick = () => {
-    home_div.style.display = 'block';
+    home_div.style.display = 'flex';
     study_guide_interface.style.display = 'none';
     study_guide_creator.style.display = 'none';
 };
 
 sgc_close_button.onclick = () => {
-    home_div.style.display = 'block';
+    home_div.style.display = 'flex';
     study_guide_interface.style.display = 'none';
     study_guide_creator.style.display = 'none';
 };
