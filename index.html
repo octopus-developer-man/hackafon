@@ -15,7 +15,7 @@
         </div>
         <div class="study_guide_interface">
             <div class="slide">
-                <p class="slide_caption">Caption</p>
+                <p class="slide_title">Title</p>
                 <p class="slide_content"></p>
                 <img class="slide_image" src="ellenjoe.webp" alt="Slide Image">
                 <button class="slide_button_1">Button 1</button>
@@ -27,43 +27,66 @@
             <button class="sgi_close_button">Close</button>
         </div>
         <div class="study_guide_creator">
+            <h2>Study Guide Creator</h2>
             <div class="sgc_grid_container" id="sgc_grid_container"></div>
             <button class="sgc_close_button">Close</button>
+            <button class="sgc_blank_all_button">Blank All Slides</button>
         </div>
         
         <div class="edit_modal" id="edit_modal">
             <div class="edit_modal_content">
                 <h2>Edit Slide</h2>
-                
-                <label>Caption:</label>
-                <input type="text" id="edit_caption" class="edit_input">
-                
-                <label>Content:</label>
-                <textarea id="edit_content" class="edit_input" rows="4"></textarea>
-                
-                <label>Button 1 Text:</label>
-                <input type="text" id="edit_button1" class="edit_input">
-                
-                <label>Button 2 Text:</label>
-                <input type="text" id="edit_button2" class="edit_input">
-                
-                <label>Button 3 Text:</label>
-                <input type="text" id="edit_button3" class="edit_input">
-                
-                <label>Button 4 Text:</label>
-                <input type="text" id="edit_button4" class="edit_input">
-                
-                <label>Correct Answer:</label>
-                <input type="text" id="edit_correct_answer" class="edit_input">
-                
-                <label>Has Image:</label>
-                <input type="checkbox" id="edit_has_image" class="edit_checkbox">
-                
+
                 <label>Slide Type:</label>
                 <select id="edit_class" class="edit_input">
                     <option value="information">Information</option>
                     <option value="question">Question</option>
                 </select>
+                
+                <label>Title:</label>
+                <input type="text" id="edit_title" class="edit_input">
+                
+                <label>Content:</label>
+                <textarea id="edit_content" class="edit_input" rows="4"></textarea>
+                
+                <div id="question_fields">
+                    <label>Answer 1 Text:</label>
+                    <input type="text" id="edit_button1" class="edit_input">
+                    
+                    <label>Answer 2 Text:</label>
+                    <input type="text" id="edit_button2" class="edit_input">
+                    
+                    <label>Answer 3 Text:</label>
+                    <input type="text" id="edit_button3" class="edit_input">
+                    
+                    <label>Answer 4 Text:</label>
+                    <input type="text" id="edit_button4" class="edit_input">
+                    
+                    <label>Correct Answer:</label>
+                    <select id="edit_correct_answer" class="edit_input">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="N/A">N/A</option>
+                    </select>
+                </div>
+                
+                <label>Has Image:</label>
+                <input type="checkbox" id="edit_has_image" class="edit_checkbox">
+                
+                <div id="image_selection" style="display: none;">
+                    <label>Select Image:</label>
+                    <select id="edit_image" class="edit_input">
+                        <option value="ellenjoe.webp">Placeholder 1</option>
+                        <option value="ellenjoe.webp">Placeholder 2</option>
+                        <option value="ellenjoe.webp">Placeholder 3</option>
+                        <option value="ellenjoe.webp">Placeholder 4</option>
+                        <option value="ellenjoe.webp">Placeholder 5</option>
+                        <option value="ellenjoe.webp">Placeholder 6</option>
+                        <option value="ellenjoe.webp">Ellen Joe</option>
+                    </select>
+                </div>
                 
                 <button class="edit_save_button">SAVE</button>
                 <button class="edit_back_button">Back</button>
