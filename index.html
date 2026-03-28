@@ -15,6 +15,7 @@
                 <div class="home_buttons">
                     <button class="sgi_open_button primary_button">▶️ Run Study Guide</button>
                     <button class="sgi_edit_button secondary_button">✏️ Edit Study Guide</button>
+                    <button class="ai_generate_button primary_button">🤖 AI Generate Slides</button>
                 </div>
                 
                 <div class="slide_sets_container">
@@ -179,6 +180,34 @@
                 <textarea id="import_json" class="import_json_textarea" rows="10"></textarea>
                 <button class="modal_import_button">Import Slides</button>
                 <button class="modal_close_button" onclick="document.getElementById('import_modal').classList.remove('show')">Cancel</button>
+            </div>
+        </div>
+        
+        <!-- Generate Slides Modal -->
+        <div class="generate_slides_modal" id="generate_slides_modal">
+            <div class="generate_slides_modal_content">
+                <button class="generate_close_btn" onclick="document.getElementById('generate_slides_modal').classList.remove('show')">✕</button>
+                <h2>🤖 Generate Slides with AI</h2>
+                
+                <div class="generate_form">
+                    <label for="generate_prompt">Describe what you want to study:</label>
+                    <textarea id="generate_prompt" class="generate_prompt_input" placeholder="Example: Create a study set about photosynthesis with definitions, diagrams, and practice questions" rows="5"></textarea>
+                    
+                    <label for="slide_count">Number of slides:</label>
+                    <select id="slide_count" class="generate_select">
+                        <option value="5">5 slides</option>
+                        <option value="10" selected>10 slides</option>
+                        <option value="15">15 slides</option>
+                        <option value="20">20 slides</option>
+                    </select>
+                    
+                    <div class="generate_info">
+                        ℹ️ AI will create a mix of information slides and practice questions.
+                    </div>
+                    
+                    <button class="generate_button" id="generate_button">Generate Slides</button>
+                    <span class="generate_loading" id="generate_loading" style="display: none;">⏳ Generating slides...</span>
+                </div>
             </div>
         </div>
         

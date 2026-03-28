@@ -46,3 +46,31 @@ async function getAnalysis(history) {
     history: history
   });
 }
+
+async function generateSlides(prompt, slideCount) {
+  try {
+    const res = await fetch("/api/ai", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        mode: "generate",
+        prompt: prompt,
+        slideCount: slideCount
+      }),
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      console.error("AI slide generation error:", error);
+      throw new Error(error.details || error.error || "Failed to generate slides");
+    }
+
+    const result = await res.json();
+    return result.slides;
+  } catch (error) {
+    console.error("Slide generation failed:", error);
+    throw error;
+  }
+}

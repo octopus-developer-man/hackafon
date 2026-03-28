@@ -685,7 +685,138 @@ body{
     transition:all 0.2s ease;
 }
 
-/* Settings Modal */
+/* Generate Slides Modal */
+.generate_slides_modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+
+.generate_slides_modal.show {
+    display: flex;
+}
+
+.generate_slides_modal_content {
+    background: linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    max-width: 500px;
+    width: 90%;
+    color: var(--text-dark);
+    position: relative;
+}
+
+.generate_slides_modal_content h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.generate_close_btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.generate_close_btn:hover {
+    color: var(--primary-color);
+}
+
+.generate_form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.generate_form label {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+.generate_prompt_input {
+    padding: 12px;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-family: 'Lora', serif;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.generate_prompt_input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.generate_select {
+    padding: 10px;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: white;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.generate_select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+}
+
+.generate_info {
+    background-color: #f0f4ff;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    font-size: 13px;
+    color: #555;
+}
+
+.generate_button {
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.generate_button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.02);
+}
+
+.generate_button:disabled {
+    background-color: #d1d5db;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.generate_loading {
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 600;
+    animation: pulse 1.5s infinite;
+}
 
 /* AI Hint Button and Quiz Controls */
 .quiz_controls {

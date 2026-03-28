@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { mode, question, userAnswer, correctAnswer, history } = req.body;
+    const { mode, question, userAnswer, correctAnswer, history, prompt, slideCount } = req.body;
 
     // Validate required fields
     if (!mode) {
@@ -20,8 +20,8 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: "Server configuration error: API key not configured" });
     }
 
-    const prompt = buildPrompt(mode, question, userAnswer, correctAnswer, history);
-    if (!prompt) {
+    const promptText = buildPrompt(mode, question, userAnswer, correctAnswer, history, prompt, slideCount);
+    if (!promptText) {
       return res.status(400).json({ error: "Invalid mode or missing parameters" });
     }
 
@@ -34,9 +34,9 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
-        messages: [{ role: "user", content: prompt }],
-        temperature: 0.7,
-        max_tokens: 500,
+        messages: [{ role: "user", content: promptText }],
+        temperature: mode === "generate" ? 0.8 : 0.7,
+        max_tokens: mode === "generate" ? 3000 : 500,
       }),
     });
 
@@ -58,6 +58,20 @@ export default async function handler(req, res) {
 
     const reply = data.choices[0].message.content;
 
+    // For slide generation, parse and validate the JSON
+    if (mode === "generate") {
+      try {
+        const slides = JSON.parse(reply);
+        if (!Array.isArray(slides)) {
+          throw new Error("Response is not an array");
+        }
+        return res.status(200).json({ slides });
+      } catch (parseError) {
+        console.error("Failed to parse generated slides:", parseError);
+        return res.status(500).json({ error: "Invalid slide format from AI", details: parseError.message });
+      }
+    }
+
     return res.status(200).json({ reply });
   } catch (error) {
     console.error("Server error:", error.message);
@@ -66,7 +80,7 @@ export default async function handler(req, res) {
 }
 
 // Build prompts based on mode
-function buildPrompt(mode, question, userAnswer, correctAnswer, history) {
+function buildPrompt(mode, question, userAnswer, correctAnswer, history, prompt, slideCount) {
   switch (mode) {
     case "hint":
       return `Give a helpful hint for this study question (without revealing the answer): "${question}"`;
@@ -76,6 +90,9 @@ function buildPrompt(mode, question, userAnswer, correctAnswer, history) {
     
     case "analysis":
       return `Analyze these incorrect answers from a student and provide a summary of improvement areas:\n${JSON.stringify(history)}`;
+    
+    case "generate":
+      return `Create a study guide with ${slideCount} slides about: "${prompt}"\n\nReturn a JSON array of slides. Mix information slides and questions. Each slide should have this structure:\n{\n  "title": "slide title",\n  "content": "content for information slides only",\n  "image": "ellenjoe.webp",\n  "has_image": false,\n  "class": "information" or "question" or "fill-in-the-blank",\n  "button1": "multiple choice option or 'Next' for info",\n  "button2": "option 2",\n  "button3": "option 3", \n  "button4": "option 4",\n  "correct_answer": "1-4" or "N/A" for info,\n  "blank_answer": "for fill-in-the-blank only"\n}\n\nFor information slides: set class to "information", button1 to "Next", others to "", correct_answer to "N/A".\nFor questions: set class to "question", include 4 different answers, mark correct one (1-4).\nFor fill-in-the-blank: set class to "fill-in-the-blank", content is the sentence with blank, button fields empty, blank_answer is the word.\n\nReturn ONLY the JSON array, no other text.`;
     
     default:
       return "Please help with this study question.";

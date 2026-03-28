@@ -868,3 +868,90 @@ render_slide_sets();
 // API key is now securely stored in Vercel .env
 // No user configuration needed - AI features work automatically!
 
+// ========== AI SLIDE GENERATION ==========
+
+const ai_generate_button = document.querySelector('.ai_generate_button');
+const generate_slides_modal = document.getElementById('generate_slides_modal');
+const generate_button = document.getElementById('generate_button');
+const generate_prompt = document.getElementById('generate_prompt');
+const slide_count = document.getElementById('slide_count');
+const generate_loading = document.getElementById('generate_loading');
+
+// Open generate slides modal
+if (ai_generate_button) {
+    ai_generate_button.onclick = () => {
+        generate_slides_modal.classList.add('show');
+        generate_prompt.value = '';
+        generate_prompt.focus();
+    };
+}
+
+// Close modal when clicking outside
+generate_slides_modal.onclick = (event) => {
+    if (event.target === generate_slides_modal) {
+        generate_slides_modal.classList.remove('show');
+    }
+};
+
+// Generate slides
+generate_button.onclick = async () => {
+    const prompt = generate_prompt.value.trim();
+    
+    if (!prompt) {
+        alert('Please describe what you want to study');
+        return;
+    }
+    
+    generate_button.disabled = true;
+    generate_button.style.display = 'none';
+    generate_loading.style.display = 'inline-block';
+    
+    try {
+        const numSlides = parseInt(slide_count.value);
+        const generatedSlides = await generateSlides(prompt, numSlides);
+        
+        if (!generatedSlides || generatedSlides.length === 0) {
+            alert('Failed to generate slides. Please try again.');
+            return;
+        }
+        
+        // Validate and normalize generated slides
+        const validSlides = generatedSlides.map(slide => ({
+            title: slide.title || 'Untitled',
+            content: slide.content || '',
+            image: slide.image || 'ellenjoe.webp',
+            has_image: slide.has_image || false,
+            class: slide.class || 'information',
+            button1: slide.button1 || '',
+            button2: slide.button2 || '',
+            button3: slide.button3 || '',
+            button4: slide.button4 || '',
+            correct_answer: slide.correct_answer || 'N/A',
+            blank_answer: slide.blank_answer || ''
+        }));
+        
+        // Replace current slides with generated ones
+        slides.length = 0;
+        slides.push(...validSlides);
+        
+        // Close modal and go to edit mode
+        generate_slides_modal.classList.remove('show');
+        
+        // Go to edit mode to show the generated slides
+        home_div.style.display = 'none';
+        study_guide_interface.style.display = 'none';
+        study_guide_creator.style.display = 'block';
+        init_grid();
+        
+        alert(`✨ Generated ${validSlides.length} slides! You can now edit them or run the quiz.`);
+        
+    } catch (error) {
+        console.error('Error generating slides:', error);
+        alert(`Error: ${error.message}`);
+    } finally {
+        generate_button.disabled = false;
+        generate_button.style.display = 'inline-block';
+        generate_loading.style.display = 'none';
+    }
+};
+
