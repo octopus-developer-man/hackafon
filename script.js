@@ -864,3 +864,57 @@ save_current_button.onclick = () => {
 // Initialize slide sets on page load
 render_slide_sets();
 
+// ========== AI SETTINGS FUNCTIONALITY ==========
+
+const settings_modal = document.getElementById('settings_modal');
+const api_key_input = document.getElementById('api_key_input');
+const settings_save_button = document.querySelector('.settings_save_button');
+const settings_close_button = document.querySelector('.settings_close_button');
+
+// Load API key on page load
+window.addEventListener('DOMContentLoaded', () => {
+    const saved_api_key = localStorage.getItem('openai_api_key');
+    if (saved_api_key) {
+        api_key_input.value = saved_api_key;
+    }
+});
+
+// Save API key
+settings_save_button.onclick = () => {
+    const api_key = api_key_input.value.trim();
+    if (!api_key) {
+        alert('Please enter an API key');
+        return;
+    }
+    localStorage.setItem('openai_api_key', api_key);
+    alert('API key saved successfully!');
+    settings_modal.classList.remove('show');
+};
+
+// Close settings modal
+settings_close_button.onclick = () => {
+    settings_modal.classList.remove('show');
+};
+
+// Close modal when clicking outside
+settings_modal.onclick = (event) => {
+    if (event.target === settings_modal) {
+        settings_modal.classList.remove('show');
+    }
+};
+
+// Add settings button to home - add this to the home_buttons div
+function add_settings_button() {
+    const home_buttons = document.querySelector('.home_buttons');
+    const settings_button = document.createElement('button');
+    settings_button.className = 'primary_button';
+    settings_button.textContent = '⚙️ AI Settings';
+    settings_button.onclick = () => {
+        settings_modal.classList.add('show');
+    };
+    home_buttons.appendChild(settings_button);
+}
+
+// Initialize settings button
+add_settings_button();
+

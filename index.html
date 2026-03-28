@@ -38,9 +38,53 @@
                     <button class="fill_blank_submit">Submit</button>
                     <p class="fill_blank_feedback" id="fill_blank_feedback"></p>
                 </div>
+                <div class="quiz_controls">
+                    <button class="ai_hint_button" id="ai_hint_button" style="display: none;">💡 Get Hint</button>
+                    <span class="hint_loading" id="hint_loading" style="display: none;">Loading hint...</span>
+                </div>
+                <div class="slide_progress"><span id="slide_counter">1 / 1</span></div>
             </div>
             <button class="sgi_next_button">Next Slide</button>
             <button class="sgi_close_button">Close</button>
+        </div>
+        
+        <!-- Explanation Modal -->
+        <div class="explanation_modal" id="explanation_modal">
+            <div class="explanation_modal_content">
+                <button class="explanation_close_btn" onclick="document.getElementById('explanation_modal').classList.remove('show')">✕</button>
+                <h2>Explanation</h2>
+                <p id="explanation_text"></p>
+                <button class="explanation_next_btn">Continue to Next</button>
+            </div>
+        </div>
+        
+        <!-- Quiz Results Page -->
+        <div class="quiz_results_page" id="quiz_results_page">
+            <div class="results_container">
+                <h1>Quiz Complete! 🎉</h1>
+                <div class="results_stats">
+                    <div class="stat_box">
+                        <p class="stat_label">Correct Answers</p>
+                        <p class="stat_value" id="correct_count">0</p>
+                    </div>
+                    <div class="stat_box">
+                        <p class="stat_label">Total Questions</p>
+                        <p class="stat_value" id="total_count">0</p>
+                    </div>
+                    <div class="stat_box">
+                        <p class="stat_label">Score</p>
+                        <p class="stat_value" id="score_percentage">0%</p>
+                    </div>
+                </div>
+                <div class="results_analysis" id="results_analysis">
+                    <h3>AI Analysis - Areas to Improve</h3>
+                    <p id="analysis_text">Loading analysis...</p>
+                </div>
+                <div class="results_buttons">
+                    <button class="results_retry_btn">Take Quiz Again</button>
+                    <button class="results_home_btn">Back to Home</button>
+                </div>
+            </div>
         </div>
         <div class="study_guide_creator">
             <h2>Study Guide Creator</h2>
@@ -137,6 +181,28 @@
                 <button class="modal_close_button" onclick="document.getElementById('import_modal').classList.remove('show')">Cancel</button>
             </div>
         </div>
+        
+        <!-- API Key Settings Modal -->
+        <!-- Settings Modal -->
+        <div class="settings_modal" id="settings_modal">
+            <div class="settings_modal_content">
+                <h2>AI Settings</h2>
+                <p>Enter your OpenAI API key to enable AI features (hint, explanations, and summary).</p>
+                
+                <label>OpenAI API Key:</label>
+                <input type="password" id="api_key_input" class="settings_input" placeholder="sk-...">
+                
+                <p class="settings_info">Your API key is stored locally in your browser and never sent to our servers.</p>
+                
+                <div class="settings_buttons">
+                    <button class="settings_save_button">Save API Key</button>
+                    <button class="settings_close_button">Close</button>
+                </div>
+            </div>
+        </div>
+        
+        <script src="api/ai-client.js"></script>
         <script src="script.js"></script>
+        <script src="script-ai-integration.js"></script>
     </body>
 </html>
