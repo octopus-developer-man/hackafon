@@ -1,11 +1,12 @@
 :root{
-    --color-one: #5ADED4;
-    --color-two: #4DAAAB;
-    --color-three: #26596A;
-    --color-four:#163342;
-    --color-five:#6C98A1;
-    --color-six:#C4D7ED;
-    --color-seven:#E1E6FA;
+    --color-one: #607D8B;
+    --color-two: #546E7A;
+    --color-three: #37474F;
+    --color-four:#292A2B;
+    --color-five:#BEBDBF;
+    --color-six:#374140;
+    --color-seven:#31353D;
+    --color-eight:#393262;
 }
 body{
     background-color:var(--color-one);
