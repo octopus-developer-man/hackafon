@@ -61,7 +61,9 @@ export default async function handler(req, res) {
     // For slide generation, parse and validate the JSON
     if (mode === "generate") {
       try {
-        const slides = JSON.parse(reply);
+        // Strip markdown code blocks if AI wrapped it
+        let cleanedReply = reply.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        const slides = JSON.parse(cleanedReply);
         if (!Array.isArray(slides)) {
           throw new Error("Response is not an array");
         }

@@ -916,19 +916,27 @@ generate_button.onclick = async () => {
         }
         
         // Validate and normalize generated slides
-        const validSlides = generatedSlides.map(slide => ({
-            title: slide.title || 'Untitled',
-            content: slide.content || '',
-            image: slide.image || 'ellenjoe.webp',
-            has_image: slide.has_image || false,
-            class: slide.class || 'information',
-            button1: slide.button1 || '',
-            button2: slide.button2 || '',
-            button3: slide.button3 || '',
-            button4: slide.button4 || '',
-            correct_answer: slide.correct_answer || 'N/A',
-            blank_answer: slide.blank_answer || ''
-        }));
+        const validSlides = generatedSlides.map(slide => {
+            // Ensure all required fields exist
+            return {
+                title: slide.title || 'Untitled',
+                content: slide.content || '',
+                image: slide.image || 'ellenjoe.webp',
+                has_image: slide.has_image === true,
+                class: ['information', 'question', 'fill-in-the-blank'].includes(slide.class) ? slide.class : 'information',
+                button1: slide.button1 || '',
+                button2: slide.button2 || '',
+                button3: slide.button3 || '',
+                button4: slide.button4 || '',
+                correct_answer: slide.correct_answer || 'N/A',
+                blank_answer: slide.blank_answer || ''
+            };
+        }).filter(slide => slide.title && slide.title !== ''); // Filter out empty slides
+        
+        if (validSlides.length === 0) {
+            alert('AI generated no valid slides. Please try again with a different prompt.');
+            return;
+        }
         
         // Replace current slides with generated ones
         slides.length = 0;

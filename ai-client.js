@@ -68,7 +68,16 @@ async function generateSlides(prompt, slideCount) {
     }
 
     const result = await res.json();
-    return result.slides;
+    let slides = result.slides;
+    
+    // If slides is a string, parse it (might be JSON string from API)
+    if (typeof slides === 'string') {
+      // Strip markdown code blocks if present
+      slides = slides.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+      slides = JSON.parse(slides);
+    }
+    
+    return slides;
   } catch (error) {
     console.error("Slide generation failed:", error);
     throw error;
