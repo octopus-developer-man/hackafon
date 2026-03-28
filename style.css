@@ -421,7 +421,7 @@ body{
 
 .sgc_grid_button:hover{
     background-color:var(--color-five);
-    color:var(--color-four);
+    color:var(--color-three);
     transform:scale(1.05);
     transition:all 0.2s ease;
 }
@@ -530,7 +530,7 @@ body{
 
 .edit_back_button:hover{
     background-color:var(--color-five);
-    color:var(--color-four);
+    color:var(--color-three);
     transform:scale(1.02);
     transition:all 0.2s ease;
 }
@@ -555,7 +555,7 @@ body{
 .sgc_import_button:hover,
 .sgc_add_slide_button:hover{
     background-color:var(--color-five);
-    color:var(--color-four);
+    color:var(--color-three);
     transform:scale(1.05);
     transition:all 0.2s ease;
 }
@@ -680,7 +680,7 @@ body{
 
 .modal_close_button:hover{
     background-color:var(--color-five);
-    color:var(--color-four);
+    color:var(--color-three);
     transform:scale(1.05);
     transition:all 0.2s ease;
 }
