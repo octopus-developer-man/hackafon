@@ -36,8 +36,8 @@ const slides = [
     {
         title: 'Welcome to the Cosmos',
         content: 'Space is a vast expanse filled with stars, planets, galaxies, and mysteries we are still discovering.',
-        image: null,
-        has_image: false,
+        image: "nebula.jpeg",
+        has_image: true,
         class: 'information',
         button1: 'Next',
         button2: '',
@@ -48,7 +48,7 @@ const slides = [
     {
         title: 'The Solar System',
         content: 'Our solar system contains eight planets orbiting the Sun, each with unique features and environments.',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'information',
         button1: 'Next',
@@ -60,7 +60,7 @@ const slides = [
     {
         title: 'Q1: What is the Sun?',
         content: '',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'question',
         button1: 'A star',
@@ -72,7 +72,7 @@ const slides = [
     {
         title: 'Galaxies Explained',
         content: 'Galaxies are massive collections of stars, dust, and dark matter. The Milky Way is our home galaxy.',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'information',
         button1: 'Next',
@@ -84,7 +84,7 @@ const slides = [
     {
         title: 'Q2: What galaxy do we live in?',
         content: '',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'question',
         button1: 'Andromeda',
@@ -96,7 +96,7 @@ const slides = [
     {
         title: 'Stars and Their Life Cycle',
         content: 'Stars are born in nebulae, live for millions to billions of years, and end as white dwarfs, neutron stars, or black holes.',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'information',
         button1: 'Next',
@@ -108,7 +108,7 @@ const slides = [
     {
         title: 'Q3: Where are stars born?',
         content: '',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'question',
         button1: 'Nebulae',
@@ -120,7 +120,7 @@ const slides = [
     {
         title: 'Planets: Rocky vs Gas Giants',
         content: 'Rocky planets like Earth have solid surfaces. Gas giants like Jupiter are massive and made mostly of hydrogen and helium.',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'information',
         button1: 'Next',
@@ -132,7 +132,7 @@ const slides = [
     {
         title: 'Q4: Which is a gas giant?',
         content: '',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'question',
         button1: 'Earth',
@@ -144,7 +144,7 @@ const slides = [
     {
         title: 'Black Holes',
         content: 'Black holes are regions of space where gravity is so strong that not even light can escape.',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'information',
         button1: 'Next',
@@ -156,7 +156,7 @@ const slides = [
     {
         title: 'Q5: What is a black hole?',
         content: '',
-        image: null,
+        image: 'ellenjoe.webp',
         has_image: false,
         class: 'question',
         button1: 'A collapsed star',
@@ -165,8 +165,150 @@ const slides = [
         button4: 'A comet',
         correct_answer: '1'
     },
-
-    // --- ELLEN JOE SECTION MOVED TO END ---
+    {
+        title: 'Exoplanets',
+        content: 'Exoplanets are planets that orbit stars outside our solar system. Thousands have been discovered.',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'information',
+        button1: 'Next',
+        button2: '',
+        button3: '',
+        button4: '',
+        correct_answer: 'N/A'
+    },
+    {
+        title: 'Q6: What is an exoplanet?',
+        content: '',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'question',
+        button1: 'A planet outside our solar system',
+        button2: 'A dwarf star',
+        button3: 'A type of asteroid',
+        button4: 'A moon of Jupiter',
+        correct_answer: '1'
+    },
+    {
+        title: 'Nebulae',
+        content: 'Nebulae are giant clouds of gas and dust where stars form. Some are bright and colorful.',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'information',
+        button1: 'Next',
+        button2: '',
+        button3: '',
+        button4: '',
+        correct_answer: 'N/A'
+    },
+    {
+        title: 'Q7: What are nebulae made of?',
+        content: '',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'question',
+        button1: 'Gas and dust',
+        button2: 'Ice and rock',
+        button3: 'Metal and lava',
+        button4: 'Water and soil',
+        correct_answer: '1'
+    },
+    {
+        title: 'The Moon',
+        content: 'Earth’s Moon is our closest celestial neighbor and influences tides and natural cycles.',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'information',
+        button1: 'Next',
+        button2: '',
+        button3: '',
+        button4: '',
+        correct_answer: 'N/A'
+    },
+    {
+        title: 'Q8: What causes ocean tides?',
+        content: '',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'question',
+        button1: 'The Moon’s gravity',
+        button2: 'Earth’s rotation only',
+        button3: 'Sunlight pressure',
+        button4: 'Wind currents',
+        correct_answer: '1'
+    },
+    {
+        title: 'Comets',
+        content: 'Comets are icy bodies that release gas and dust, forming glowing tails when near the Sun.',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'information',
+        button1: 'Next',
+        button2: '',
+        button3: '',
+        button4: '',
+        correct_answer: 'N/A'
+    },
+    {
+        title: 'Q9: What are comets mostly made of?',
+        content: '',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'question',
+        button1: 'Ice and dust',
+        button2: 'Metal and rock',
+        button3: 'Gas only',
+        button4: 'Liquid water',
+        correct_answer: '1'
+    },
+    {
+        title: 'The Speed of Light',
+        content: 'Light travels at about 300,000 kilometers per second, the fastest speed in the universe.',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'information',
+        button1: 'Next',
+        button2: '',
+        button3: '',
+        button4: '',
+        correct_answer: 'N/A'
+    },
+    {
+        title: 'Q10: What is the fastest known speed?',
+        content: '',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'question',
+        button1: 'Speed of sound',
+        button2: 'Speed of light',
+        button3: 'Speed of gravity',
+        button4: 'Speed of planets',
+        correct_answer: '2'
+    },
+    {
+        title: 'Q10: What is the fastest known speed?',
+        content: '',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'question',
+        button1: 'Speed of sound',
+        button2: 'Speed of light',
+        button3: 'Speed of gravity',
+        button4: 'Speed of planets',
+        correct_answer: '2'
+    },
+    {
+        title: 'Q10: What is the fastest known speed?',
+        content: '',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'question',
+        button1: 'Speed of sound',
+        button2: 'Speed of light',
+        button3: 'Speed of gravity',
+        button4: 'Speed of planets',
+        correct_answer: '2'
+    },
     {
         title: 'This is Ellen Joe',
         content: 'Ellen Joe is a Zenless Zone Zero character known for her shark tail and stylish combat skills.',
@@ -192,7 +334,6 @@ const slides = [
         correct_answer: '1'
     }
 ];
-
 
 let current_slide_index = 0;
 let question_answered = false;
@@ -393,6 +534,9 @@ function open_edit_modal(slide_index) {
     edit_button3.value = slide.button3;
     edit_button4.value = slide.button4;
     edit_correct_answer.value = slide.correct_answer;
+    if(edit_correct_answer.value !== '1' && edit_correct_answer.value !== '2' && edit_correct_answer.value !== '3' && edit_correct_answer.value !== '4') {
+        edit_correct_answer.value = '1';
+    }
     edit_has_image.checked = slide.has_image;
     edit_class.value = slide.class;
     edit_image.value = slide.image === 'ellenjoe.webp' ? 'ellenjoe.webp' : slide.image;

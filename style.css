@@ -122,6 +122,7 @@ body{
     box-shadow:var(--shadow-lg);
     backdrop-filter:blur(10px);
     border:1px solid rgba(255, 255, 255, 0.2);
+    overflow-x:hidden;
 }
 
 .slide_sets_container h3{
@@ -198,8 +199,8 @@ body{
     transition:all 0.3s ease;
 }
 
-.slide_set_slot:hover{
-    background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.slide_set_slot.filled:hover{
+    background:linear-gradient(135deg, var(--accent-color) 0%, #764ba2 100%);
     color:white;
     border-color:var(--accent-color);
     transform:translateX(4px);
@@ -220,7 +221,7 @@ body{
 
 .slide_set_slot.empty{
     opacity:0.6;
-    color:var(--color-five);
+    color:black;
 }
 
 .slide_set_slot_title{
@@ -411,7 +412,7 @@ body{
     margin-bottom:10px;
     border:1px solid var(--color-two);
     border-radius:5px;
-    background-color:var(--color-three);
+    background-color:var(--color-eight);
     color:var(--color-five);
     font-family:"Lora", sans-serif;
     font-size:14px;
@@ -421,7 +422,7 @@ body{
 .edit_input:focus{
     outline:none;
     border-color:var(--color-five);
-    background-color:var(--color-four);
+    background-color:var(--color-eight);
 }
 
 .edit_checkbox{
