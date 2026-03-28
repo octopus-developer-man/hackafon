@@ -13,11 +13,9 @@ body{
     height:100vh;
     width:100vw;
     overflow:hidden;
-    font-family:"Fira Sans", sans-serif;
-}
-h1{
+    font-family:"Lora", sans-serif;
     text-align:center;
-    color:var(--color-four);
+    color:var(--color-five);
     margin-top:20px;
 }
 .home > button{
@@ -25,15 +23,15 @@ h1{
     margin:20px auto;
     padding:10px 20px;
     background-color:var(--color-two);
-    color:var(--color-seven);
+    color:var(--color-five);
     border:none;
     border-radius:5px;
     cursor:pointer;
-    font-size:16px;
+    font-size:30px;
     text-align:center;
 }
 .home > button:hover{
-    background-color:var(--color-five);
+    background-color:var(--color-seven);
 }
 .sgi_close_button,
 .sgc_close_button{
