@@ -310,7 +310,7 @@ const slides = [
         correct_answer: 'N/A'
     },
     {
-        title: 'Is Ellen Joe a baddie?',
+        title: 'Is Ellen Joe tuff?',
         content: '',
         image: 'ellenjoe.webp',
         has_image: true,
