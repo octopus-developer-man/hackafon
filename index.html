@@ -12,6 +12,12 @@
             <h1>HELP I HAVE TWENTY MINUTES BEFORE MY TEST WHAT DO I DO!!!!!????</h1>
             <button class="sgi_open_button">Run Study Guide</button>
             <button class="sgi_edit_button">Edit Study Guide</button>
+            
+            <div class="slide_sets_container">
+                <h3>Slide Sets</h3>
+                <button class="save_current_button">💾 Save Current</button>
+                <div class="slide_sets_scrollable" id="slide_sets_scrollable"></div>
+            </div>
         </div>
         <div class="study_guide_interface">
             <div class="slide">
@@ -29,6 +35,8 @@
         <div class="study_guide_creator">
             <h2>Study Guide Creator</h2>
             <div class="sgc_grid_container" id="sgc_grid_container"></div>
+            <button class="sgc_export_button">Export Slides</button>
+            <button class="sgc_import_button">Import Slides</button>
             <button class="sgc_close_button">Close</button>
             <button class="sgc_blank_all_button">Blank All Slides</button>
         </div>
@@ -64,10 +72,10 @@
                     
                     <label>Correct Answer:</label>
                     <select id="edit_correct_answer" class="edit_input">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                         <option value="N/A">N/A</option>
                     </select>
                 </div>
@@ -78,9 +86,9 @@
                 <div id="image_selection" style="display: none;">
                     <label>Select Image:</label>
                     <select id="edit_image" class="edit_input">
-                        <option value="ellenjoe.webp">Placeholder 1</option>
-                        <option value="ellenjoe.webp">Placeholder 2</option>
-                        <option value="ellenjoe.webp">Placeholder 3</option>
+                        <option value="earth.png">Planet Earth</option>
+                        <option value="lofi.jpeg">Lofi Girl</option>
+                        <option value="studying.jpeg">Studying Meme</option>
                         <option value="ellenjoe.webp">Placeholder 4</option>
                         <option value="ellenjoe.webp">Placeholder 5</option>
                         <option value="ellenjoe.webp">Placeholder 6</option>
@@ -90,6 +98,26 @@
                 
                 <button class="edit_save_button">SAVE</button>
                 <button class="edit_back_button">Back</button>
+            </div>
+        </div>
+        
+        <div class="export_modal" id="export_modal">
+            <div class="modal_content">
+                <h2>Export Slides</h2>
+                <p>Copy the JSON below and save it to share:</p>
+                <textarea id="export_json" class="export_json_textarea" readonly></textarea>
+                <button class="modal_copy_button">Copy to Clipboard</button>
+                <button class="modal_close_button" onclick="document.getElementById('export_modal').classList.remove('show')">Close</button>
+            </div>
+        </div>
+        
+        <div class="import_modal" id="import_modal">
+            <div class="modal_content">
+                <h2>Import Slides</h2>
+                <p>Paste your JSON here:</p>
+                <textarea id="import_json" class="import_json_textarea" rows="10"></textarea>
+                <button class="modal_import_button">Import Slides</button>
+                <button class="modal_close_button" onclick="document.getElementById('import_modal').classList.remove('show')">Cancel</button>
             </div>
         </div>
         <script src="script.js"></script>

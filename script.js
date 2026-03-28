@@ -17,11 +17,25 @@ const slide_button_2 = document.querySelector('.slide_button_2');
 const slide_button_3 = document.querySelector('.slide_button_3');
 const slide_button_4 = document.querySelector('.slide_button_4');
 
+// Export/Import elements
+const sgc_export_button = document.querySelector('.sgc_export_button');
+const sgc_import_button = document.querySelector('.sgc_import_button');
+const export_modal = document.getElementById('export_modal');
+const import_modal = document.getElementById('import_modal');
+const export_json = document.getElementById('export_json');
+const import_json = document.getElementById('import_json');
+
+// Slide Sets elements
+const slide_sets_scrollable = document.getElementById('slide_sets_scrollable');
+const save_current_button = document.querySelector('.save_current_button');
+const SLIDE_SETS_COUNT = 12;
+const SLIDE_SETS_STORAGE_KEY = 'hackafon_slide_sets';
+
 // Slide data structure
 const slides = [
     {
-        title: 'Introduction to Nutrition',
-        content: 'Nutrition is the study of how food and nutrients affect our body\'s growth, development, and health. A balanced diet provides the energy and nutrients needed for daily activities.',
+        title: 'This is Ellen Joe',
+        content: 'Ellen Joe is a Zenless Zone Zero character, she has a shark tail.',
         image: 'ellenjoe.webp',
         has_image: true,
         class: 'information',
@@ -32,20 +46,20 @@ const slides = [
         correct_answer: 'N/A'
     },
     {
-        title: 'Q1: What is a macronutrient?',
+        title: 'Is Ellen Joe a baddie?',
         content: '',
         image: 'ellenjoe.webp',
         has_image: true,
         class: 'question',
-        button1: 'Protein, fats, carbs',
-        button2: 'Vitamins and minerals',
-        button3: 'Water and fiber',
-        button4: 'All of the above',
-        correct_answer: 'A'
+        button1: 'Yes',
+        button2: 'No',
+        button3: 'Maybe',
+        button4: 'I don\'t know',
+        correct_answer: '1'
     },
     {
-        title: 'The Food Groups Explained',
-        content: 'The five main food groups are: Fruits, Vegetables, Grains, Protein, and Dairy. Each group provides different essential nutrients. Eating a variety from each group ensures balanced nutrition.',
+        title: 'Space cool',
+        content: 'cool planit',
         image: null,
         has_image: false,
         class: 'information',
@@ -65,7 +79,7 @@ const slides = [
         button2: 'Grain group',
         button3: 'Dairy group',
         button4: 'Protein group',
-        correct_answer: 'A'
+        correct_answer: '1'
     },
     {
         title: 'Understanding Proteins',
@@ -89,7 +103,7 @@ const slides = [
         button2: 'Rice',
         button3: 'Beans alone',
         button4: 'Lettuce',
-        correct_answer: 'A'
+        correct_answer: '1'
     },
     {
         title: 'Carbohydrates: Simple vs Complex',
@@ -113,7 +127,7 @@ const slides = [
         button2: 'Whole wheat bread',
         button3: 'Candy',
         button4: 'Soda',
-        correct_answer: 'B'
+        correct_answer: '2'
     },
     {
         title: 'Healthy Fats Overview',
@@ -137,7 +151,7 @@ const slides = [
         button2: 'Trans fat',
         button3: 'Unsaturated fat',
         button4: 'All equally healthy',
-        correct_answer: 'C'
+        correct_answer: '3'
     },
     {
         title: 'Vitamins and Minerals Guide',
@@ -161,7 +175,7 @@ const slides = [
         button2: 'Supports immunity',
         button3: 'Improves eyesight',
         button4: 'Makes blood',
-        correct_answer: 'B'
+        correct_answer: '2'
     },
     {
         title: 'Calorie Consumption Basics',
@@ -185,7 +199,7 @@ const slides = [
         button2: '7 calories',
         button3: '9 calories',
         button4: '12 calories',
-        correct_answer: 'A'
+        correct_answer: '1'
     },
     {
         title: 'Balanced Diet Principles',
@@ -209,7 +223,7 @@ const slides = [
         button2: 'Whole grains',
         button3: 'Processed foods',
         button4: 'Sugar and salt',
-        correct_answer: 'B'
+        correct_answer: '2'
     },
     {
         title: 'Hydration and Health',
@@ -233,7 +247,7 @@ const slides = [
         button2: 'No, not needed',
         button3: 'Only sometimes',
         button4: 'Never important',
-        correct_answer: 'A'
+        correct_answer: '1'
     },
     {
         title: 'Reading Nutrition Labels',
@@ -257,7 +271,7 @@ const slides = [
         button2: 'Amount listed on label',
         button3: 'Whole package',
         button4: 'Daily recommendation',
-        correct_answer: 'B'
+        correct_answer: '2'
     },
     {
         title: 'Special Diets Overview',
@@ -281,7 +295,7 @@ const slides = [
         button2: 'All vegetables',
         button3: 'Only meat',
         button4: 'Grains',
-        correct_answer: 'A'
+        correct_answer: '1'
     },
     {
         title: 'Nutrition and Exercise',
@@ -305,7 +319,7 @@ const slides = [
         button2: '6 hours later',
         button3: 'Never eat',
         button4: 'Only drink water',
-        correct_answer: 'A'
+        correct_answer: '1'
     },
     {
         title: 'Key Nutrition Takeaways',
@@ -356,25 +370,25 @@ function check_answer(button_letter) {
     disable_buttons();
 
     // Show correct answer in green
-    if (slide.correct_answer === 'A') {
+    if (slide.correct_answer === '1') {
         slide_button_1.style.backgroundColor = '#4CAF50';
-    } else if (slide.correct_answer === 'B') {
+    } else if (slide.correct_answer === '2') {
         slide_button_2.style.backgroundColor = '#4CAF50';
-    } else if (slide.correct_answer === 'C') {
+    } else if (slide.correct_answer === '3') {
         slide_button_3.style.backgroundColor = '#4CAF50';
-    } else if (slide.correct_answer === 'D') {
+    } else if (slide.correct_answer === '4') {
         slide_button_4.style.backgroundColor = '#4CAF50';
     }
     
     // If user clicked wrong answer, show it in red
     if (button_letter !== slide.correct_answer) {
-        if (button_letter === 'A') {
+        if (button_letter === '1') {
             slide_button_1.style.backgroundColor = '#f44336';
-        } else if (button_letter === 'B') {
+        } else if (button_letter === '2') {
             slide_button_2.style.backgroundColor = '#f44336';
-        } else if (button_letter === 'C') {
+        } else if (button_letter === '3') {
             slide_button_3.style.backgroundColor = '#f44336';
-        } else if (button_letter === 'D') {
+        } else if (button_letter === '4') {
             slide_button_4.style.backgroundColor = '#f44336';
         }
     }
@@ -449,10 +463,10 @@ sgi_next_button.onclick = () => {
     display_slide(current_slide_index);
 };
 
-slide_button_1.onclick = () => {check_answer("A");};
-slide_button_2.onclick = () => {check_answer("B");};
-slide_button_3.onclick = () => {check_answer("C");};
-slide_button_4.onclick = () => {check_answer("D");};
+slide_button_1.onclick = () => {check_answer("1")};
+slide_button_2.onclick = () => {check_answer("2")};
+slide_button_3.onclick = () => {check_answer("3")};
+slide_button_4.onclick = () => {check_answer("4");};
 
 // Edit mode elements
 const sgc_grid_container = document.getElementById('sgc_grid_container');
@@ -599,4 +613,159 @@ sgi_edit_button.onclick = () => {
     study_guide_creator.style.display = 'block';
     init_grid();
 };
+
+// Export Slides functionality
+sgc_export_button.onclick = () => {
+    export_json.textContent = JSON.stringify(slides, null, 2);
+    export_modal.classList.add('show');
+};
+
+document.querySelector('.modal_copy_button').onclick = () => {
+    export_json.select();
+    document.execCommand('copy');
+    alert('Slides JSON copied to clipboard!');
+};
+
+// Import Slides functionality
+sgc_import_button.onclick = () => {
+    import_json.value = '';
+    import_modal.classList.add('show');
+};
+
+document.querySelector('.modal_import_button').onclick = () => {
+    try {
+        const imported_slides = JSON.parse(import_json.value);
+        
+        // Validate that it's an array
+        if (!Array.isArray(imported_slides)) {
+            alert('Invalid JSON format. Please paste valid slides JSON.');
+            return;
+        }
+        
+        // Validate that each slide has required fields
+        for (let slide of imported_slides) {
+            if (!slide.title || slide.class === undefined) {
+                alert('Invalid slide format. Each slide must have a title and class.');
+                return;
+            }
+        }
+        
+        // Replace slides with imported data
+        slides.length = 0;
+        slides.push(...imported_slides);
+        
+        // Close import modal and refresh grid
+        import_modal.classList.remove('show');
+        init_grid();
+        alert('Slides imported successfully!');
+    } catch (error) {
+        alert('Error parsing JSON. Please check the format and try again.\n\nError: ' + error.message);
+    }
+};
+
+// Close modals when clicking outside of the content
+export_modal.onclick = (event) => {
+    if (event.target === export_modal) {
+        export_modal.classList.remove('show');
+    }
+};
+
+import_modal.onclick = (event) => {
+    if (event.target === import_modal) {
+        import_modal.classList.remove('show');
+    }
+};
+
+// ========== SLIDE SETS FUNCTIONALITY ==========
+
+function get_slide_sets() {
+    const saved = localStorage.getItem(SLIDE_SETS_STORAGE_KEY);
+    if (!saved) {
+        // Initialize empty slide sets
+        const empty_sets = Array(SLIDE_SETS_COUNT).fill(null);
+        return empty_sets;
+    }
+    return JSON.parse(saved);
+}
+
+function save_slide_sets(sets) {
+    localStorage.setItem(SLIDE_SETS_STORAGE_KEY, JSON.stringify(sets));
+}
+
+function save_to_slot(slot_index) {
+    const sets = get_slide_sets();
+    sets[slot_index] = JSON.parse(JSON.stringify(slides));
+    save_slide_sets(sets);
+    render_slide_sets();
+    alert(`Slides saved to slot ${slot_index + 1}!`);
+}
+
+function load_from_slot(slot_index) {
+    const sets = get_slide_sets();
+    if (!sets[slot_index]) {
+        alert('This slot is empty!');
+        return;
+    }
+    
+    // Replace current slides with slot data
+    slides.length = 0;
+    slides.push(...sets[slot_index]);
+    
+    alert(`Slides loaded from slot ${slot_index + 1}!`);
+}
+
+function render_slide_sets() {
+    const sets = get_slide_sets();
+    slide_sets_scrollable.innerHTML = '';
+    
+    for (let i = 0; i < SLIDE_SETS_COUNT; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'slide_set_slot';
+        
+        if (sets[i]) {
+            slot.classList.add('filled');
+            const title = document.createElement('div');
+            title.className = 'slide_set_slot_title';
+            title.textContent = sets[i][0]?.title || `Slot ${i + 1}`;
+            
+            const count = document.createElement('div');
+            count.className = 'slide_set_slot_count';
+            count.textContent = `${sets[i].length} slides`;
+            
+            slot.appendChild(title);
+            slot.appendChild(count);
+            
+            slot.onclick = () => load_from_slot(i);
+        } else {
+            slot.classList.add('empty');
+            slot.innerHTML = `<div class="slide_set_slot_title">Empty Slot ${i + 1}</div>`;
+            
+            slot.ondblclick = () => {
+                if (confirm('Save current slides to this slot?')) {
+                    save_to_slot(i);
+                }
+            };
+        }
+        
+        slide_sets_scrollable.appendChild(slot);
+    }
+}
+
+// Save current button functionality
+save_current_button.onclick = () => {
+    // Show a simple dialog to choose a slot
+    const slot_str = prompt(`Enter slot number (1-${SLIDE_SETS_COUNT}):`, '1');
+    if (slot_str === null) return;
+    
+    const slot_num = parseInt(slot_str) - 1;
+    if (isNaN(slot_num) || slot_num < 0 || slot_num >= SLIDE_SETS_COUNT) {
+        alert(`Please enter a number between 1 and ${SLIDE_SETS_COUNT}`);
+        return;
+    }
+    
+    save_to_slot(slot_num);
+};
+
+// Initialize slide sets on page load
+render_slide_sets();
 
