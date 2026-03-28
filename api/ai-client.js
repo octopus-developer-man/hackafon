@@ -12,7 +12,7 @@ async function callAI(data) {
     if (!res.ok) {
       const error = await res.json();
       console.error("AI API error:", error);
-      return null;
+      throw new Error(error.details || error.error || "API request failed");
     }
 
     const result = await res.json();
@@ -21,7 +21,7 @@ async function callAI(data) {
     console.error("AI call failed:", error);
     return null;
   }
-
+}
 
 // Helper functions for different AI modes
 async function getHint(question) {

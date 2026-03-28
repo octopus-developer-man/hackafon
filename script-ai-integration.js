@@ -63,11 +63,11 @@ async function getHintForCurrentSlide() {
             usedHints.add(current_slide_index);
             showHintModal(hint);
         } else {
-            alert('Could not generate hint. Please try again.');
+            alert('Could not generate hint. Please make sure your API key is set in Vercel environment variables.');
         }
     } catch (error) {
         console.error('Error getting hint:', error);
-        alert('Error getting hint. Please try again.');
+        alert('Error: Could not get hint. Please try again.');
     } finally {
         hint_loading.style.display = 'none';
         updateHintButton();
@@ -120,9 +120,14 @@ async function fetchExplanationAsync(slide, userAnswer) {
         if (explanation) {
             const explanation_text = document.getElementById('explanation_text');
             explanation_text.innerHTML = `<strong>Explanation:</strong><br>${explanation}`;
+        } else {
+            const explanation_text = document.getElementById('explanation_text');
+            explanation_text.innerHTML = `<strong>Explanation:</strong><br>Could not generate explanation. Please try again.`;
         }
     } catch (error) {
         console.error('Error getting explanation:', error);
+        const explanation_text = document.getElementById('explanation_text');
+        explanation_text.textContent = 'Error loading explanation. Please try again.';
     }
 }
 
