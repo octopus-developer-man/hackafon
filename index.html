@@ -33,6 +33,11 @@
                 <button class="slide_button_2">Button 2</button>
                 <button class="slide_button_3">Button 3</button>
                 <button class="slide_button_4">Button 4</button>
+                <div class="fill_blank_container" style="display: none;">
+                    <input type="text" class="fill_blank_input" id="fill_blank_input" placeholder="Type the word here...">
+                    <button class="fill_blank_submit">Submit</button>
+                    <p class="fill_blank_feedback" id="fill_blank_feedback"></p>
+                </div>
             </div>
             <button class="sgi_next_button">Next Slide</button>
             <button class="sgi_close_button">Close</button>
@@ -40,6 +45,7 @@
         <div class="study_guide_creator">
             <h2>Study Guide Creator</h2>
             <div class="sgc_grid_container" id="sgc_grid_container"></div>
+            <button class="sgc_add_slide_button">➕ Add Slide</button>
             <button class="sgc_export_button">Export Slides</button>
             <button class="sgc_import_button">Import Slides</button>
             <button class="sgc_close_button">Close</button>
@@ -54,6 +60,7 @@
                 <select id="edit_class" class="edit_input">
                     <option value="information">Information</option>
                     <option value="question">Question</option>
+                    <option value="fill-in-the-blank">Fill in the Blank</option>
                 </select>
                 
                 <label>Title:</label>
@@ -84,6 +91,11 @@
                     </select>
                 </div>
                 
+                <div id="fill_blank_fields" style="display: none;">
+                    <label>Correct Answer Word:</label>
+                    <input type="text" id="edit_blank_answer" class="edit_input" placeholder="Enter the correct word">
+                </div>
+                
                 <label>Has Image:</label>
                 <input type="checkbox" id="edit_has_image" class="edit_checkbox">
                 
@@ -101,6 +113,7 @@
                 </div>
                 
                 <button class="edit_save_button">SAVE</button>
+                <button class="edit_delete_button">🗑️ Delete Slide</button>
                 <button class="edit_back_button">Back</button>
             </div>
         </div>

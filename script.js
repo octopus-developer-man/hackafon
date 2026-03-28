@@ -298,18 +298,6 @@ const slides = [
         correct_answer: '2'
     },
     {
-        title: 'Q10: What is the fastest known speed?',
-        content: '',
-        image: 'ellenjoe.webp',
-        has_image: false,
-        class: 'question',
-        button1: 'Speed of sound',
-        button2: 'Speed of light',
-        button3: 'Speed of gravity',
-        button4: 'Speed of planets',
-        correct_answer: '2'
-    },
-    {
         title: 'This is Ellen Joe',
         content: 'Ellen Joe is a Zenless Zone Zero character known for her shark tail and stylish combat skills.',
         image: 'ellenjoe.webp',
@@ -331,9 +319,27 @@ const slides = [
         button2: 'No',
         button3: 'Maybe',
         button4: 'I don’t know',
-        correct_answer: '1'
-    }
+        correct_answer: '1'    },
+    {
+        title: 'Fill in the Blank: Stars',
+        content: 'Stars are born in _______ clouds of gas and dust.',
+        image: 'nebula.jpeg',
+        has_image: true,
+        class: 'fill-in-the-blank',
+        button1: '',
+        button2: '',
+        button3: '',
+        button4: '',
+        correct_answer: 'N/A',
+        blank_answer: 'nebula'    }
 ];
+
+// Normalize slides to ensure they have all required properties
+slides.forEach(slide => {
+    if (!slide.blank_answer) {
+        slide.blank_answer = '';
+    }
+});
 
 let current_slide_index = 0;
 let question_answered = false;
@@ -394,6 +400,30 @@ function check_answer(button_letter) {
     }
 }
 
+function check_blank_answer() {
+    const slide = slides[current_slide_index];
+    
+    // Only check for fill-in-the-blank slides
+    if (slide.class !== 'fill-in-the-blank' || question_answered) {
+        return;
+    }
+    
+    const user_answer = fill_blank_input.value.trim().toLowerCase();
+    const correct_answer = slide.blank_answer.toLowerCase();
+    
+    question_answered = true;
+    fill_blank_input.disabled = true;
+    fill_blank_submit.disabled = true;
+    
+    if (user_answer === correct_answer) {
+        fill_blank_feedback.textContent = '✅ Correct!';
+        fill_blank_feedback.style.color = '#4CAF50';
+    } else {
+        fill_blank_feedback.textContent = `❌ Incorrect. The answer is: ${slide.blank_answer}`;
+        fill_blank_feedback.style.color = '#f44336';
+    }
+}
+
 // Function to update the slide display
 function display_slide(index) {
     const slide = slides[index];
@@ -424,17 +454,26 @@ function display_slide(index) {
     enable_buttons();
     reset_button_styles();
     
-    // Hide buttons for information slides
-    if (slide.class === 'information') {
-        slide_button_1.style.display = 'none';
-        slide_button_2.style.display = 'none';
-        slide_button_3.style.display = 'none';
-        slide_button_4.style.display = 'none';
-    } else {
+    // Hide all interactive elements first
+    slide_button_1.style.display = 'none';
+    slide_button_2.style.display = 'none';
+    slide_button_3.style.display = 'none';
+    slide_button_4.style.display = 'none';
+    document.querySelector('.fill_blank_container').style.display = 'none';
+    
+    // Show appropriate interactive elements based on slide type
+    if (slide.class === 'question') {
         slide_button_1.style.display = 'inline-block';
         slide_button_2.style.display = 'inline-block';
         slide_button_3.style.display = 'inline-block';
         slide_button_4.style.display = 'inline-block';
+    } else if (slide.class === 'fill-in-the-blank') {
+        document.querySelector('.fill_blank_container').style.display = 'flex';
+        fill_blank_input.value = '';
+        fill_blank_feedback.textContent = '';
+        fill_blank_feedback.style.color = '';
+        fill_blank_input.disabled = false;
+        fill_blank_submit.disabled = false;
     }
 }
 
@@ -463,12 +502,7 @@ sgi_next_button.onclick = () => {
     display_slide(current_slide_index);
 };
 
-slide_button_1.onclick = () => {check_answer("1")};
-slide_button_2.onclick = () => {check_answer("2")};
-slide_button_3.onclick = () => {check_answer("3")};
-slide_button_4.onclick = () => {check_answer("4");};
-
-// Edit mode elements
+// Edit mode elements (must be before event listeners that use them)
 const sgc_grid_container = document.getElementById('sgc_grid_container');
 const edit_modal = document.getElementById('edit_modal');
 const edit_title = document.getElementById('edit_title');
@@ -478,11 +512,26 @@ const edit_button2 = document.getElementById('edit_button2');
 const edit_button3 = document.getElementById('edit_button3');
 const edit_button4 = document.getElementById('edit_button4');
 const edit_correct_answer = document.getElementById('edit_correct_answer');
+const edit_blank_answer = document.getElementById('edit_blank_answer');
 const edit_has_image = document.getElementById('edit_has_image');
 const edit_image = document.getElementById('edit_image');
 const edit_class = document.getElementById('edit_class');
 const edit_save_button = document.querySelector('.edit_save_button');
 const edit_back_button = document.querySelector('.edit_back_button');
+const fill_blank_input = document.getElementById('fill_blank_input');
+const fill_blank_submit = document.querySelector('.fill_blank_submit');
+const fill_blank_feedback = document.getElementById('fill_blank_feedback');
+
+slide_button_1.onclick = () => {check_answer("1")};
+slide_button_2.onclick = () => {check_answer("2")};
+slide_button_3.onclick = () => {check_answer("3")};
+slide_button_4.onclick = () => {check_answer("4");};
+fill_blank_submit.onclick = () => {check_blank_answer()};
+fill_blank_input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        check_blank_answer();
+    }
+});
 
 // Track if save button has been pressed
 let has_saved = false;
@@ -504,10 +553,16 @@ function init_grid() {
 // Toggle question fields based on slide type
 function toggle_question_fields() {
     const question_fields = document.getElementById('question_fields');
+    const fill_blank_fields = document.getElementById('fill_blank_fields');
     if (edit_class.value === 'question') {
         question_fields.style.display = 'block';
+        fill_blank_fields.style.display = 'none';
+    } else if (edit_class.value === 'fill-in-the-blank') {
+        question_fields.style.display = 'none';
+        fill_blank_fields.style.display = 'block';
     } else {
         question_fields.style.display = 'none';
+        fill_blank_fields.style.display = 'none';
     }
 }
 
@@ -537,6 +592,7 @@ function open_edit_modal(slide_index) {
     if(edit_correct_answer.value !== '1' && edit_correct_answer.value !== '2' && edit_correct_answer.value !== '3' && edit_correct_answer.value !== '4') {
         edit_correct_answer.value = '1';
     }
+    edit_blank_answer.value = slide.blank_answer || '';
     edit_has_image.checked = slide.has_image;
     edit_class.value = slide.class;
     edit_image.value = slide.image === 'ellenjoe.webp' ? 'ellenjoe.webp' : slide.image;
@@ -568,6 +624,7 @@ edit_save_button.onclick = () => {
     slide.button3 = edit_button3.value;
     slide.button4 = edit_button4.value;
     slide.correct_answer = edit_correct_answer.value;
+    slide.blank_answer = edit_blank_answer.value;
     slide.has_image = edit_has_image.checked;
     slide.class = edit_class.value;
     slide.image = edit_image.value;
@@ -607,6 +664,41 @@ sgc_blank_all_button.onclick = () => {
     });
     
     init_grid();
+};
+
+// Add slide button
+const sgc_add_slide_button = document.querySelector('.sgc_add_slide_button');
+sgc_add_slide_button.onclick = () => {
+    const new_slide = {
+        title: 'New Slide',
+        content: '',
+        image: 'ellenjoe.webp',
+        has_image: false,
+        class: 'information',
+        button1: '',
+        button2: '',
+        button3: '',
+        button4: '',
+        correct_answer: 'N/A',
+        blank_answer: ''
+    };
+    slides.push(new_slide);
+    init_grid();
+};
+
+// Delete slide button
+const edit_delete_button = document.querySelector('.edit_delete_button');
+edit_delete_button.onclick = () => {
+    if (slides.length === 1) {
+        alert('You cannot delete the last slide!');
+        return;
+    }
+    
+    if (confirm('Are you sure you want to delete this slide?')) {
+        slides.splice(currently_editing_slide, 1);
+        close_edit_modal();
+        init_grid();
+    }
 };
 
 // Initialize grid when entering edit mode

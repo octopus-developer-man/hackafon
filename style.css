@@ -335,6 +335,68 @@ body{
     transition:all 0.2s ease;
 }
 
+/* Fill-in-the-Blank Styles */
+.fill_blank_container{
+    margin:30px auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+    max-width:400px;
+}
+
+.fill_blank_input{
+    padding:12px 20px;
+    font-size:16px;
+    border:2px solid var(--color-two);
+    border-radius:8px;
+    background-color:var(--color-five);
+    color:var(--text-dark);
+    text-align:center;
+    font-family:"Lora", sans-serif;
+    width:100%;
+    box-sizing:border-box;
+    transition:all 0.3s ease;
+}
+
+.fill_blank_input:focus{
+    outline:none;
+    border-color:var(--accent-color);
+    box-shadow:0 0 10px rgba(240, 147, 251, 0.3);
+}
+
+.fill_blank_submit{
+    padding:12px 32px;
+    background-color:var(--color-two);
+    color:var(--color-five);
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    user-select:none;
+    transition:all 0.3s ease;
+}
+
+.fill_blank_submit:hover{
+    background-color:var(--color-five);
+    color:var(--color-two);
+    transform:scale(1.05);
+}
+
+.fill_blank_submit:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+    transform:scale(1);
+}
+
+.fill_blank_feedback{
+    font-size:16px;
+    font-weight:bold;
+    margin:10px 0 0 0;
+    min-height:24px;
+}
+
 /* Grid for edit mode */
 .sgc_grid_container{
     display:grid;
@@ -474,7 +536,8 @@ body{
 }
 
 .sgc_export_button,
-.sgc_import_button{
+.sgc_import_button,
+.sgc_add_slide_button{
     display:inline-block;
     margin:10px;
     padding:10px 15px;
@@ -489,10 +552,32 @@ body{
 }
 
 .sgc_export_button:hover,
-.sgc_import_button:hover{
+.sgc_import_button:hover,
+.sgc_add_slide_button:hover{
     background-color:var(--color-five);
     color:var(--color-four);
     transform:scale(1.05);
+    transition:all 0.2s ease;
+}
+
+.edit_delete_button{
+    display:block;
+    width:100%;
+    padding:12px 20px;
+    background-color:#d9534f;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:bold;
+    user-select:none;
+    margin-top:10px;
+}
+
+.edit_delete_button:hover{
+    background-color:#c9302c;
+    transform:scale(1.02);
     transition:all 0.2s ease;
 }
 
