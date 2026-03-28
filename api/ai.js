@@ -85,13 +85,13 @@ export default async function handler(req, res) {
 function buildPrompt(mode, question, userAnswer, correctAnswer, history, prompt, slideCount) {
   switch (mode) {
     case "hint":
-      return `Give a helpful hint for this study question (without revealing the answer): "${question}"`;
+      return `Give a SHORT one-sentence hint for this study question (without revealing the answer): "${question}"`;
     
     case "explain":
-      return `The student answered "${userAnswer}" to the question "${question}". The correct answer is "${correctAnswer}". Briefly explain why their answer was wrong and why the correct answer is right.`;
+      return `The student answered "${userAnswer}" to the question "${question}". The correct answer is "${correctAnswer}". Briefly explain in 1-2 sentences why they were wrong and what the correct answer is.`;
     
     case "analysis":
-      return `Analyze these incorrect answers from a student and provide a summary of improvement areas:\n${JSON.stringify(history)}`;
+      return `Analyze these incorrect answers from a student and provide a SHORT bullet-point summary (3-5 points max) of key improvement areas:\n${JSON.stringify(history)}\n\nBe concise and specific.`;
     
     case "generate":
       return `Create a study guide with ${slideCount} slides about: "${prompt}"\n\nReturn a JSON array of slides. Mix information slides and questions. Each slide should have this structure:\n{\n  "title": "slide title",\n  "content": "content for information slides only",\n  "image": "ellenjoe.webp",\n  "has_image": false,\n  "class": "information" or "question" or "fill-in-the-blank",\n  "button1": "multiple choice option or 'Next' for info",\n  "button2": "option 2",\n  "button3": "option 3", \n  "button4": "option 4",\n  "correct_answer": "1-4" or "N/A" for info,\n  "blank_answer": "for fill-in-the-blank only"\n}\n\nFor information slides: set class to "information", button1 to "Next", others to "", correct_answer to "N/A".\nFor questions: set class to "question", include 4 different answers, mark correct one (1-4).\nFor fill-in-the-blank: set class to "fill-in-the-blank", content is the sentence with blank, button fields empty, blank_answer is the word.\n\nReturn ONLY the JSON array, no other text.`;
