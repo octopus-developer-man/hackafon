@@ -8,8 +8,13 @@
     --color-seven:#aaaaaa;
 }
 body{
-    background:var(--color-one);
+    background-color:var(--color-one);
     height:100vh;
     width:100vw;
     overflow:hidden;
+}
+h1{
+    text-align:center;
+    color:black;
+    margin-top:20px;
 }
