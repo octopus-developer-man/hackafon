@@ -1,1 +1,15 @@
-
+:root{
+    --color-one: #ff0000;
+    --color-two: #00ff00;
+    --color-three: #0000ff;
+    --color-four:#ffff00;
+    --color-five:#ff00ff;
+    --color-six:#00ffff;
+    --color-seven:#aaaaaa;
+}
+body{
+    background:var(--color-one);
+    height:100vh;
+    width:100vw;
+    overflow:hidden;
+}
