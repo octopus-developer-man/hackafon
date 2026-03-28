@@ -52,11 +52,6 @@ async function getHintForCurrentSlide() {
     const hint_loading = document.getElementById('hint_loading');
     const current_slide = slides[current_slide_index];
     
-    if (!localStorage.getItem('openai_api_key')) {
-        alert('Please set your OpenAI API key in AI Settings first!');
-        return;
-    }
-    
     hint_button.style.display = 'none';
     hint_loading.style.display = 'inline-block';
     hint_button.disabled = true;
@@ -68,7 +63,7 @@ async function getHintForCurrentSlide() {
             usedHints.add(current_slide_index);
             showHintModal(hint);
         } else {
-            alert('Could not generate hint. Please check your API key.');
+            alert('Could not generate hint. Please try again.');
         }
     } catch (error) {
         console.error('Error getting hint:', error);
@@ -105,11 +100,6 @@ function trackAnswer(question, userAnswer, correctAnswer, isCorrect) {
 
 // Show explanation modal for wrong answers
 function showWrongAnswerExplanation(slide, userAnswer) {
-    if (!localStorage.getItem('openai_api_key')) {
-        console.log('No API key set, skipping AI explanation');
-        return;
-    }
-    
     const explanation_text = document.getElementById('explanation_text');
     const explanation_modal = document.getElementById('explanation_modal');
     const next_btn = document.querySelector('.explanation_next_btn');
@@ -231,9 +221,8 @@ async function showQuizResults() {
     
     // Get AI analysis
     const analysisText = document.getElementById('analysis_text');
-    const hasApiKey = localStorage.getItem('openai_api_key');
     
-    if (hasApiKey && totalCount > 0) {
+    if (totalCount > 0) {
         analysisText.textContent = 'Loading AI analysis...';
         
         try {
@@ -243,7 +232,7 @@ async function showQuizResults() {
                 if (analysis) {
                     analysisText.textContent = analysis;
                 } else {
-                    analysisText.textContent = 'Could not generate analysis. Please check your API key.';
+                    analysisText.textContent = 'Could not generate analysis. Please try again.';
                 }
             } else {
                 analysisText.textContent = '🌟 Perfect! You got all questions correct!';
@@ -252,8 +241,6 @@ async function showQuizResults() {
             console.error('Error getting analysis:', error);
             analysisText.textContent = 'Error generating analysis. Please try again.';
         }
-    } else if (!hasApiKey) {
-        analysisText.textContent = '⚙️ Set your API key in AI Settings to get personalized analysis!';
     } else {
         analysisText.textContent = 'No questions answered yet.';
     }

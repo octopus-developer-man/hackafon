@@ -6,11 +6,18 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { mode, question, userAnswer, correctAnswer, history, apiKey } = req.body;
+    const { mode, question, userAnswer, correctAnswer, history } = req.body;
 
     // Validate required fields
-    if (!mode || !apiKey) {
-      return res.status(400).json({ error: "Missing mode or apiKey" });
+    if (!mode) {
+      return res.status(400).json({ error: "Missing mode" });
+    }
+
+    // Get API key from environment variable (Vercel .env)
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      console.error("Missing OPENAI_API_KEY environment variable");
+      return res.status(500).json({ error: "Server configuration error: API key not set" });
     }
 
     // Use OpenAI API
