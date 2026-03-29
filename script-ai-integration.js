@@ -78,7 +78,9 @@ async function getHintForCurrentSlide() {
 function showHintModal(hint) {
     const explanation_text = document.getElementById('explanation_text');
     const explanation_modal = document.getElementById('explanation_modal');
+    const modal_title = document.getElementById('explanation_modal_title');
     
+    modal_title.textContent = 'Hint';
     explanation_text.innerHTML = `<strong>💡 Hint:</strong><br>${hint}`;
     explanation_modal.classList.add('show');
     
