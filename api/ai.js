@@ -85,10 +85,10 @@ export default async function handler(req, res) {
 function buildPrompt(mode, question, userAnswer, correctAnswer, history, prompt, slideCount) {
   switch (mode) {
     case "hint":
-      return `Give a SHORT one-sentence hint for this study question (without revealing the answer): "${question}"`;
+      return `Give the student a SHORT one-sentence hint for this study question (without revealing the answer). Address them directly using "you": "${question}"`;
     
     case "explain":
-      return `You answered "${userAnswer}" to the question "${question}". The correct answer is "${correctAnswer}". Briefly explain in 1-2 sentences why your answer was wrong and what the correct answer is.`;
+      return `The student answered "${userAnswer}" to the question "${question}". The correct answer is "${correctAnswer}". Briefly explain to them in 1-2 sentences why their answer was wrong and what the correct answer is. Address them directly using "you".`;
     
     case "analysis":
       return `Looking at your incorrect answers, provide a SHORT bullet-point summary (3-5 points max) of key areas where you need to improve:\n${JSON.stringify(history)}\n\nSpeak directly to me (use "you"). Be concise and specific.`;
