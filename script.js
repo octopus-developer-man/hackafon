@@ -430,8 +430,8 @@ function display_slide(index) {
     
     slide_title.textContent = slide.title;
     
-    // Display content for information slides only
-    if (slide.class === "information") {
+    // Display content for information and question slides
+    if (slide.class === "information" || slide.class === "question") {
         slide_content.textContent = slide.content;
         slide_content.style.display = "block";
     } 
